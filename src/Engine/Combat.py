@@ -1,0 +1,170 @@
+<<<<<<< HEAD
+from src.Character.Character import Character
+from src.utils.inputs import wait_user, input_option
+
+from random import randint
+from src.utils.time import delay
+from src.utils.terminal import clear_terminal
+
+class Combat():
+
+    def run(self, player: Character, enemies: list[Character]) -> None:
+
+        combat_options: list[str] = ['ATACAR']  # TODO: INSERIR OUTRAS OPÇÕES PARA O COMBATE
+        
+        if(len(enemies) > 1):
+            print(f"{len(enemies)} INIMIGOS APARECERAM!")
+        else:
+            print("UM INIMIGO APARECEU!")
+
+        delay(2000)
+
+        while player.is_alive() and self.any_enemies_alive(enemies):
+
+            for enemy in enemies:
+                clear_terminal()
+                self.print_combatants(player, enemy)
+
+                turn: bool = True
+                while player.is_alive() and enemy.is_alive():
+
+                    if turn:
+                        delay()
+                        option: int = input_option(combat_options, "ESCOLHA UMA AÇÃO:")
+                        delay(500)
+                        self.process_action(player, option, enemy)
+
+                    else:
+                        delay()
+                        option: int = randint(0, len(combat_options) - 1)
+                        delay(500)
+                        self.process_action(enemy, option, player)
+                    delay()
+
+
+                    turn = self.change_turn(turn)
+                    clear_terminal()
+                    self.print_combatants(player, enemy)
+
+                    if player.is_dead():
+                        print("VOCÊ PERDEU O COMBATE!")
+                        wait_user()
+                        return
+                    
+                player.cure(int(player.max_health_points * 0.4))
+                        
+            print("VOCÊ VENCEU O COMBATE! PARABÉNS!")
+            wait_user()
+
+    def any_enemies_alive(self, enemies: list[Character]):
+        for enemy in enemies:
+            if enemy.is_alive():
+                return True
+        return False
+        
+    def print_combatants(self, player: Character, enemy: Character):
+        print(player.lifebar)
+        print(enemy.lifebar)
+        
+
+    def change_turn(self, turn: bool) -> bool:
+        return not turn
+    
+    def process_action(self, character: Character, option: int, target: Character|None)->None:
+
+        match option:
+
+            # ATAQUE
+            case 0:
+                if target == None:
+                    return
+                character.attack(target)
+            
+            # EM CASO DE ERRO -> ATAQUE
+            case _:
+                if target == None:
+                    return
+=======
+from src.Character.Character import Character
+from src.utils.inputs import wait_user, input_option
+
+from random import randint
+from src.utils.terminal import clear_terminal
+
+class Combat():
+
+    def run(self, player: Character, enemies: list[Character]) -> None:
+        clear_terminal()
+
+        combat_options: list[str] = ['ATACAR']  # TODO: INSERIR OUTRAS OPÇÕES PARA O COMBATE
+        
+        if(len(enemies) > 1):
+            print(f"{len(enemies)} INIMIGOS APARECERAM!")
+        else:
+            print("UM INIMIGO APARECEU!")
+
+        wait_user()
+        clear_terminal()
+
+        while player.is_alive() and self.any_enemies_alive(enemies):
+
+            for enemy in enemies:
+                clear_terminal()
+
+                self.print_combatants(player, enemy)
+
+                turn: bool = True
+                while player.is_alive() and enemy.is_alive():
+                    clear_terminal()
+                    if turn:
+                        option: int = input_option(combat_options, "ESCOLHA UMA AÇÃO:")
+                        self.process_action(player, option, enemy)
+
+                    else:
+                        option: int = randint(0, len(combat_options) - 1)
+                        self.process_action(enemy, option, player)
+                    
+                    turn = self.change_turn(turn)
+
+                    self.print_combatants(player, enemy)
+
+                    if player.is_dead():
+                        print("VOCÊ PERDEU O COMBATE!")
+                        wait_user()
+                        clear_terminal()
+                        return
+                        
+            print("VOCÊ VENCEU O COMBATE! PARABÉNS!")
+            wait_user()
+            clear_terminal()
+
+    def any_enemies_alive(self, enemies: list[Character]):
+        for enemy in enemies:
+            if enemy.is_alive():
+                return True
+        return False
+        
+    def print_combatants(self, player: Character, enemy: Character):
+        print(player.lifebar)
+        print(enemy.lifebar)
+        wait_user()
+
+    def change_turn(self, turn: bool) -> bool:
+        return not turn
+    
+    def process_action(self, character: Character, option: int, target: Character|None)->None:
+
+        match option:
+
+            # ATAQUE
+            case 0:
+                if target == None:
+                    return
+                character.attack(target)
+            
+            # EM CASO DE ERRO -> ATAQUE
+            case _:
+                if target == None:
+                    return
+>>>>>>> 1423d12 (Atualizando projeto com mudnaças feitas em camaragibe)
+                character.attack(target)
