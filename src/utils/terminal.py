@@ -1,12 +1,5 @@
 import os
 
-<<<<<<< HEAD
-def clear_terminal():
-    if os.name == 'nt':
-        os.system('cls')
-    else:
-        os.system('clear')
-
 def set_color_white():
     return "\033[30m"
 
@@ -27,7 +20,6 @@ def print_square():
 
 def print_empty_square():
     return "\u25A1"
-=======
 # Limpa a tela no Windows ('cls') ou Linux/Mac ('clear')
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -40,4 +32,3 @@ if __name__ == "__main__":
 
     clear_terminal()
     input()
->>>>>>> 1423d12 (Atualizando projeto com mudnaças feitas em camaragibe)

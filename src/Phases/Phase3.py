@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from src.Engine.Phase import Phase
 from src.Character.Character import Character
 
@@ -17,19 +16,4 @@ class Phase3(Phase):
         print(player)
         print('')
 
-=======
-from src.Engine.Phase import Phase
-from src.Character.Character import Character
-from src.utils.inputs import wait_user
-
-class Phase3(Phase):
-    def __init__(self):
-        pass
-
-    def run(self, player: Character):
-        print("Fase 3 rodando")
-        print(player)
-        print('')
-
->>>>>>> 1423d12 (Atualizando projeto com mudnaças feitas em camaragibe)
         wait_user()
