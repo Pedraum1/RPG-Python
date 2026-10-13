@@ -9,14 +9,14 @@ class Combat():
 
     def run(self, player: Character, enemies: list[Character]) -> None:
 
-        combat_options: list[str] = ['ATACAR']  # TODO: INSERIR OUTRAS OPÇÕES PARA O COMBATE
+        combat_options: list[str] = ['ATACAR']
         
         if(len(enemies) > 1):
             print(f"{len(enemies)} INIMIGOS APARECERAM!")
         else:
             print("UM INIMIGO APARECEU!")
 
-        delay(2000)
+        delay()
 
         while player.is_alive() and self.any_enemies_alive(enemies):
 
@@ -30,15 +30,14 @@ class Combat():
                     if turn:
                         delay()
                         option: int = input_option(combat_options, "ESCOLHA UMA AÇÃO:")
-                        delay(500)
                         self.process_action(player, option, enemy)
+                        wait_user()
 
                     else:
                         delay()
                         option: int = randint(0, len(combat_options) - 1)
-                        delay(500)
                         self.process_action(enemy, option, player)
-                    delay()
+                        wait_user()
 
 
                     turn = self.change_turn(turn)
@@ -49,8 +48,10 @@ class Combat():
                         print("VOCÊ PERDEU O COMBATE!")
                         wait_user()
                         return
-                    
+
+                print(f"{player.name} DERROTOU {enemy.name}")
                 player.cure(int(player.max_health_points * 0.4))
+                wait_user()
                         
             print("VOCÊ VENCEU O COMBATE! PARABÉNS!")
             wait_user()

@@ -2,7 +2,6 @@ from src.Engine.Phase import Phase
 from src.Engine.Combat import Combat
 from src.Character.Character import Character
 
-from src.Character.Role.Warrior import Warrior
 from src.Character.Role.Mage import Mage
 from src.Character.Role.Assassin import Assassin
 
@@ -19,4 +18,4 @@ class Phase2(Phase):
         print("Fase 2 rodando")
         delay()
 
-        Combat().run(player, [Character(Assassin(), "Zed"), Character(Mage(), "Ryze")])
+        Combat().run(player, [Character(Assassin(), "Zed"), Character(Mage(), "Ryze", 2)])

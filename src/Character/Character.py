@@ -20,7 +20,7 @@ class CharacterStatusDTO():
 
 class Character():
 
-    def __init__(self, role: "Role", name:str = ""):
+    def __init__(self, role: "Role", name:str = "", level:int = 1):
 
         self.health_points: int
         self.max_health_points: int
@@ -38,6 +38,10 @@ class Character():
         self.apply_status(Status)
 
         self.level: int = 1
+        if level > 1:
+            self.level_up(level)
+        self.level: int = level
+        
         self.lifebar: Lifebar = Lifebar(self)
 
         self.playable: bool = False
@@ -81,7 +85,7 @@ class Character():
             return
         
         self.health_points += heal
-        print(f"{self.name} curou {set_color_green()}{heal}{set_color_white()} pontos d evida")
+        print(f"{self.name} curou {set_color_green()}{heal}{set_color_white()} pontos de vida")
         delay()
     
     def is_alive(self):
